@@ -10,7 +10,7 @@ pipelines:
     materials:
       build:
         pipeline: build_and_package
-        stage: test_stage
+        stage: build_stage
       SourceCodeRepo:
         git: https://github.com/mpiekunk/node-bulletin-board
         shallow_clone: false
