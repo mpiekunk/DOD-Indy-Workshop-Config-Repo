@@ -23,7 +23,11 @@ pipelines:
             elastic_profile_id: demo-app
             tasks:
             - exec:
-                command: echo ready
+                arguments:
+                  - -c
+                  - echo ready
+                command: /bin/bash
+                run_if: passed
     - deploy_to_uat:
         approval:
           type: manual
@@ -53,4 +57,8 @@ pipelines:
             elastic_profile_id: demo-app
             tasks:
             - exec:
-                command: echo approved
+                arguments:
+                  - -c
+                  - echo approved
+                command: /bin/bash
+                run_if: passed
