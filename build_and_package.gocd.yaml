@@ -1,22 +1,29 @@
 format_version: 4
 pipelines:
+  # Pipeline Name = build_and_package
   build_and_package:
+    # Pipeline group name = kubernetes
     group: kubernetes
     display_order: 1
     environment_variables:
-      DOCKERHUB_USERNAME: # YOUR VALUE
+      DOCKERHUB_USERNAME: mattpiek
     materials:
+      # Material Name = git
       git:
-        git: # YOUR VALUE
+        git: https://github.com/mpiekunk/node-bulletin-board
+        # Git feature - get latest version only (not history)
         shallow_clone: true
     stages:
+    # Stage Name = build_stage
     - build_stage:
         # This can be set to manual if desired
         approval:
           type: success
         jobs:
+          # Job Name = build_image
           build_image:
             elastic_profile_id: demo-app
+            # These artifacts should be available to store
             artifacts:
             - external:
                 id: bulletin-board
@@ -28,6 +35,7 @@ pipelines:
             tasks:
             - exec:
                 arguments:
+                # -c is required if you want bash shell interpretation (see docs)
                 - -c
                 - docker build -t $DOCKERHUB_USERNAME/bulletin-board:$GO_PIPELINE_LABEL . -f Dockerfile.application
                 command: /bin/bash
