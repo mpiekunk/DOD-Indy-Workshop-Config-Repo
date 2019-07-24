@@ -11,9 +11,6 @@ pipelines:
       uat:
         pipeline: deploy_to_uat
         stage: approval_stage
-      build:
-        pipeline: build_and_package
-        stage: test_stage
       SourceCodeRepo:
         git: https://github.com/mpiekunk/node-bulletin-board
         shallow_clone: false
@@ -32,6 +29,7 @@ pipelines:
                   SkipImagePulling: 'true'
                 # Note Artifact is coming from diff stage than trigger
                 artifact_id: bulletin-board
+                # Giving inheritance path of pipelines
                 pipeline: build_and_package/deploy_to_uat
                 stage: build_stage
                 job: build_image
