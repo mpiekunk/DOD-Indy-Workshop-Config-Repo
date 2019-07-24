@@ -1,6 +1,6 @@
 format_version: 4
 pipelines:
-  deploy_to_prod:
+  deploy_to_uat:
     group: kubernetes
     display_order: 3
     environment_variables:
