@@ -49,7 +49,7 @@ pipelines:
                 command: ./app-deployment.sh
                 arguments:
                 run_if: passed
-    - approved:
+    - approval_stage:
         approval:
           type: manual
         jobs:
